@@ -25,6 +25,7 @@ void Terrain::init()
 	{
 		this->setImageDataWidthAndHeight();
 		Plane::vertices(this->width, this->height, this->mesh, this->indices, this->hmImageData);
+		stbi_image_free(this->hmImageData);
 	}
 	else
 	{
