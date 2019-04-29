@@ -22,12 +22,8 @@ void Input::update(float deltaTime)
 			if (event.key.keysym.sym == SDLK_s && event.key.repeat == 0) { this->backward = true; }
 			if (event.key.keysym.sym == SDLK_a && event.key.repeat == 0) { this->strafeLeft = true; }
 			if (event.key.keysym.sym == SDLK_d && event.key.repeat == 0) { this->strafeRight = true; }
-			// arrow keys
-			if (event.key.keysym.sym == SDLK_UP && event.key.repeat == 0) { this->arrowForward = true; }
-			if (event.key.keysym.sym == SDLK_DOWN && event.key.repeat == 0) { this->arrowBackward = true; }
-			if (event.key.keysym.sym == SDLK_LEFT && event.key.repeat == 0) { this->arrowLeft = true; }
-			if (event.key.keysym.sym == SDLK_RIGHT && event.key.repeat == 0) { this->arrowRight = true; }
-
+			// left shift
+			if (event.key.keysym.sym == SDLK_LSHIFT && event.key.repeat == 0) { this->lShift = true; }
 			// quit
 			if (event.key.keysym.sym == SDLK_ESCAPE) { this->quit = true; }
 			break;
@@ -36,11 +32,8 @@ void Input::update(float deltaTime)
 			if (event.key.keysym.sym == SDLK_s && event.key.repeat == 0) { this->backward = false; }
 			if (event.key.keysym.sym == SDLK_a && event.key.repeat == 0) { this->strafeLeft = false; }
 			if (event.key.keysym.sym == SDLK_d && event.key.repeat == 0) { this->strafeRight = false; }
-			// arrow keys
-			if (event.key.keysym.sym == SDLK_UP && event.key.repeat == 0) { this->arrowForward = false; }
-			if (event.key.keysym.sym == SDLK_DOWN && event.key.repeat == 0) { this->arrowBackward = false; }
-			if (event.key.keysym.sym == SDLK_LEFT && event.key.repeat == 0) { this->arrowLeft = false; }
-			if (event.key.keysym.sym == SDLK_RIGHT && event.key.repeat == 0) { this->arrowRight = false; }
+			// left shift
+			if (event.key.keysym.sym == SDLK_LSHIFT && event.key.repeat == 0) { this->lShift = false; }
 		case SDL_MOUSEMOTION:
 			this->mouseMotion = true;
 		default:
@@ -53,10 +46,6 @@ bool Input::isForward() { return this->forward; }
 bool Input::isBackward() { return this->backward; }
 bool Input::isStrafeLeft() { return this->strafeLeft; }
 bool Input::isStrafeRight() { return this->strafeRight; }
-bool Input::isArrowForward() { return this->arrowForward; }
-bool Input::isArrowBackward() { return this->arrowBackward; }
-bool Input::isArrowLeft() { return this->arrowLeft; }
-bool Input::isArrowRight() { return this->arrowRight; }
 bool Input::isMouseMotion()
 { 
 	if (this->mouseMotion)
@@ -67,6 +56,7 @@ bool Input::isMouseMotion()
 
 	return false;
 }
+bool Input::isLShift() { return this->lShift; }
 bool Input::isTab() { return this->tab; }
 bool Input::isQuit() { return this->quit; }
 

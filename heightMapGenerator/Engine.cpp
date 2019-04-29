@@ -6,7 +6,7 @@ Engine::Engine(unsigned int screenWidth, unsigned int screenHeight)
 	uniformBufferMatrices(),
 	input(),
 	camera(screenWidth, screenHeight),
-	light(glm::vec3(40, 10, 40))
+	light(glm::vec3(1, 2, 2))
 {
 	this->screenWidth = screenWidth;
 	this->screenHeight = screenHeight;
@@ -37,36 +37,40 @@ void Engine::load()
 
 void Engine::update(float deltaTime)
 {
-	glm::vec3 lightPosition = this->light.getPosition();
-
 	this->input.update(deltaTime);
-	if (this->input.isForward()) { this->camera.forward(deltaTime); };
-	if (this->input.isBackward()) { this->camera.backward(deltaTime); };
-	if (this->input.isStrafeLeft()) { this->camera.strafeLeft(deltaTime); };
-	if (this->input.isStrafeRight()) { this->camera.strafeRight(deltaTime); };
-	if (this->input.isArrowForward()) 
-	{ 
-		this->light.updatePosition(glm::vec3(lightPosition.x, lightPosition.y, lightPosition.z - 0.1));
-	};
-	if (this->input.isArrowBackward())
+
+	if (this->input.isLShift())
 	{
-		this->light.updatePosition(glm::vec3(lightPosition.x, lightPosition.y, lightPosition.z + 0.1));
-	};
-	if (this->input.isArrowLeft())
-	{
-		this->light.updatePosition(glm::vec3(lightPosition.x - 0.1, lightPosition.y, lightPosition.z));
-	};
-	if (this->input.isArrowRight())
-	{
-		this->light.updatePosition(glm::vec3(lightPosition.x + 0.1, lightPosition.y, lightPosition.z));
-	};
-	if (this->input.isMouseMotion())
-	{
-		int x, y;
-		SDL_GetMouseState(&x, &y);
-		this->camera.mousePositionUpdate(deltaTime, x, y);
-		SDL_WarpMouseInWindow(this->window, this->screenWidth / 2.0f, this->screenHeight / 2.0f);
+		ImGui::SetMouseCursor(ImGuiMouseCursor_None);
+
+		if (this->enteredRenderViewMovement == false)
+		{
+			SDL_WarpMouseInWindow(this->window, this->screenWidth / 2.0f, this->screenHeight / 2.0f);
+			this->enteredRenderViewMovement = true;
+		}
+		else
+		{
+			if (this->input.isMouseMotion())
+			{
+				int x, y;
+				SDL_GetMouseState(&x, &y);
+				this->camera.mousePositionUpdate(deltaTime, x, y);
+				SDL_WarpMouseInWindow(this->window, this->screenWidth / 2.0f, this->screenHeight / 2.0f);
+			}
+		}
+
+		// camera movement
+		if (this->input.isForward()) { this->camera.forward(deltaTime); };
+		if (this->input.isBackward()) { this->camera.backward(deltaTime); };
+		if (this->input.isStrafeLeft()) { this->camera.strafeLeft(deltaTime); };
+		if (this->input.isStrafeRight()) { this->camera.strafeRight(deltaTime); };
 	}
+	else
+	{
+		ImGui::SetMouseCursor(ImGuiMouseCursor_Arrow);
+		this->enteredRenderViewMovement = false;
+	}
+
 	if (this->input.isQuit()) { this->shutDown = true; }
 
 	this->view = this->camera.getViewMatrix();
@@ -75,12 +79,20 @@ void Engine::update(float deltaTime)
 
 void Engine::render()
 {
+	// render frambuffer
 	this->framebuffer.beginDrawingSceneToColourTexture();
 		this->terrain.draw(this->light.getPosition());
 		this->light.draw();
 	this->framebuffer.BindToFrameBuffer();
 	
 	this->framebuffer.render();
+
+	// render gui
+	ImGui::SetNextWindowPos(ImVec2(0,0)); // sets position of window
+	ImGui::Begin("Terrain", NULL, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings);
+	ImGui::Text("Settings configuration");
+	ImGui::PushItemWidth(200);
+	ImGui::End();
 }
 
 bool Engine::isShutDown()

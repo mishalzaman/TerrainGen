@@ -17,12 +17,9 @@ public:
 	bool isBackward();
 	bool isStrafeLeft();
 	bool isStrafeRight();
-	bool isArrowForward();
-	bool isArrowBackward();
-	bool isArrowLeft();
-	bool isArrowRight();
 	bool isMouseMotion();
 	bool isTab();
+	bool isLShift();
 	bool isQuit();
 private:
 	SDL_Event event;
@@ -30,10 +27,7 @@ private:
 	bool backward = false;
 	bool strafeRight = false;
 	bool strafeLeft = false;
-	bool arrowForward = false;
-	bool arrowBackward = false;
-	bool arrowLeft = false;
-	bool arrowRight = false;
+	bool lShift = false;
 	bool mouseMotion = false;
 	bool tab = false;
 	bool quit = false;

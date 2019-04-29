@@ -55,6 +55,7 @@ void Light::draw()
 	glBindVertexArray(this->VAO);
 	glm::mat4 model = glm::mat4(1.0f);
 	model = glm::translate(model, this->position);
+	model = glm::scale(model, glm::vec3(0.1, 0.1, 0.1));
 	this->shader.setMat4("model", model);
 	//glDrawArrays(GL_TRIANGLES, 0, 6);
 	glDrawElements(GL_TRIANGLES, (GLsizei)this->indices.size() * 3, GL_UNSIGNED_INT, 0);
