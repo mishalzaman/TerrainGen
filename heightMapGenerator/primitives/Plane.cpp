@@ -76,7 +76,7 @@ void Plane::vertices(
 			else
 			{
 				float pixel = heightmapImageData[width * row + column];
-				z = float(pixel / 256.0)*-0.2;
+				z = float(pixel / 256.0)*-0.32;
 			}
 
 			tMesh.position = glm::vec3(x, y, z);

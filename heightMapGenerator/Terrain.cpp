@@ -39,13 +39,10 @@ void Terrain::init()
 
 void Terrain::draw(glm::vec3 lightPosition)
 {
-	float scale = 32.0;
-
 	this->shader.use();
 	glBindVertexArray(this->VAO);
 	glm::mat4 model = glm::mat4(1.0f);
 	model = glm::translate(model, glm::vec3(0.0, 0.0, 0.0));
-	model = glm::scale(model, glm::vec3(scale, scale, scale));
 	model = glm::rotate(model, glm::radians(90.0f), glm::vec3(1.0, 0.0, 0.0));
 	this->shader.setMat4("model", model);
 
@@ -94,7 +91,7 @@ void Terrain::generateBuffers()
 
 void Terrain::setImageDataWidthAndHeight()
 {
-	std::string path = "assets/hm.png";
+	std::string path = "assets/Heightmap.png";
 	int nChannels;
 
 	this->hmImageData = stbi_load(path.c_str(), &this->width, &this->height, &nChannels, 1);

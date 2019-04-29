@@ -146,6 +146,7 @@
     <ClCompile Include="primitives\Plane.cpp" />
     <ClCompile Include="primitives\Sphere.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="State.cpp" />
     <ClCompile Include="stb_image.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="uniform_buffers\UniformBufferLight.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="primitives\Plane.h" />
     <ClInclude Include="primitives\Sphere.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="State.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="structs\meshStruct.h" />
     <ClInclude Include="Terrain.h" />

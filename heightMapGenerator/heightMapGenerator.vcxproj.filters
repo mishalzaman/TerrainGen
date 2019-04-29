@@ -99,6 +99,9 @@
     <ClCompile Include="utilities\easylogging++.cc">
       <Filter>utilities</Filter>
     </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h">
@@ -175,6 +178,9 @@
     </ClInclude>
     <ClInclude Include="utilities\easylogging++.h">
       <Filter>utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

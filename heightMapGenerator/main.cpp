@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 	OpenglSystem::initGlAttributes(3, 3);
-	OpenglSystem::enableMouseCursor(false);
+	OpenglSystem::enableMouseCursor(true);
 	OpenglSystem::enableMouseCapture(true);
 	OpenglSystem::setMouseToCenter(window, width, height);
 	OpenglSystem::enableDepthTest(true);
@@ -56,6 +56,7 @@ int main(int argc, char *argv[])
 	engine->load();
 
 	GUI::initImgui(window, context);
+	// imgui style https://www.unknowncheats.me/forum/direct3d/189635-imgui-style-settings.html
 
 	float deltaTime, lastTime = 0.0f;
 
@@ -78,7 +79,6 @@ int main(int argc, char *argv[])
 
 			// render
 			GUI::initImguiFrame(window);
-
 			// GUI::draw();
 
 			engine->render();

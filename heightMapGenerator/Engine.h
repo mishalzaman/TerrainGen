@@ -35,6 +35,7 @@ private:
 	FrameBuffer framebuffer;
 	glm::mat4 projection;
 	glm::mat4 view;
+	bool enteredRenderViewMovement = false;
 };
 
 #endif
