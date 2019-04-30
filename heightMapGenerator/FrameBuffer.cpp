@@ -54,15 +54,6 @@ void FrameBuffer::render()
 	glBindVertexArray(this->VAO);
 	glBindTexture(GL_TEXTURE_2D, this->TCB);	// use the color attachment texture as the texture of the quad plane
 	glDrawArrays(GL_TRIANGLES, 0, 6);
-
-	// display framebuffer in imgui
-	// the display comes back upaside down.
-	// To resolve this we need to fix the up vector and yaw of the camera class
-	//ImGui::SetNextWindowPos(ImVec2(0,0)); // sets position of window
-	//ImGui::Begin("Example Bug");
-	//ImGui::PushItemWidth(-100.0);
-	//ImGui::Image((void*)(intptr_t)this->TCB, ImVec2(this->screenWidth / 2.0, 512));
-	//ImGui::End();
 }
 
 

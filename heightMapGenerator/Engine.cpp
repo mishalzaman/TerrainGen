@@ -88,12 +88,13 @@ void Engine::render()
 	this->framebuffer.BindToFrameBuffer();
 	
 	this->framebuffer.render();
+	float val = 0.0;
 
 	// render gui
 	ImGui::SetNextWindowPos(ImVec2(0,0)); // sets position of window
 	ImGui::Begin("Terrain", NULL, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings);
+	ImGui::PushItemWidth(250);
 	ImGui::Checkbox("Wireframe", &this->isWireframe);
-	ImGui::PushItemWidth(200);
 	ImGui::End();
 }
 
