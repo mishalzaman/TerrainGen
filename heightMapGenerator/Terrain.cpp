@@ -53,9 +53,7 @@ void Terrain::draw(glm::vec3 lightPosition)
 	this->shader.setVec3("objectColor", glm::vec3(0.6f, 0.6f, 0.6f));
 
 	// OpenglSystem::enableCulling(true);
-	// OpenglSystem::enableWireframe(true);
 	glDrawElements(GL_TRIANGLES, (GLsizei)this->indices.size() * 3, GL_UNSIGNED_INT, 0);
-	// OpenglSystem::enableWireframe(false);
 	// OpenglSystem::enableCulling(false);
 }
 

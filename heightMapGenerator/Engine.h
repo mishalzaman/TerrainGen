@@ -36,6 +36,7 @@ private:
 	glm::mat4 projection;
 	glm::mat4 view;
 	bool enteredRenderViewMovement = false;
+	bool isWireframe = false;
 };
 
 #endif

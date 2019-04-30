@@ -81,7 +81,9 @@ void Engine::render()
 {
 	// render frambuffer
 	this->framebuffer.beginDrawingSceneToColourTexture();
+		OpenglSystem::enableWireframe(this->isWireframe);
 		this->terrain.draw(this->light.getPosition());
+		OpenglSystem::enableWireframe(false);
 		this->light.draw();
 	this->framebuffer.BindToFrameBuffer();
 	
@@ -90,7 +92,7 @@ void Engine::render()
 	// render gui
 	ImGui::SetNextWindowPos(ImVec2(0,0)); // sets position of window
 	ImGui::Begin("Terrain", NULL, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings);
-	ImGui::Text("Settings configuration");
+	ImGui::Checkbox("Wireframe", &this->isWireframe);
 	ImGui::PushItemWidth(200);
 	ImGui::End();
 }
