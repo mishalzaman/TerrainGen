@@ -19,7 +19,8 @@ namespace Plane
 		int height,
 		std::vector<MeshStruct>& mesh,
 		std::vector<glm::uvec3> &indices,
-		unsigned char* heightmapImageData
+		unsigned char* heightmapImageData,
+		float scale
 	);
 	void textures(std::vector<MeshStruct> &mesh);
 	void normals(std::vector<MeshStruct> &mesh, std::vector<glm::uvec3> &indices);
