@@ -51,7 +51,8 @@ void Plane::vertices(
 	int height,
 	std::vector<MeshStruct>& mesh,
 	std::vector<glm::uvec3>& indices,
-	unsigned char* heightmapImageData
+	unsigned char* heightmapImageData,
+	float scale
 )
 {
 	// get a width:height ratio in n:1 format
@@ -76,7 +77,7 @@ void Plane::vertices(
 			else
 			{
 				float pixel = heightmapImageData[width * row + column];
-				z = float(pixel / 256.0)*-0.32;
+				z = float(pixel / 256.0)*-scale;
 			}
 
 			tMesh.position = glm::vec3(x, y, z);

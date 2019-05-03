@@ -24,8 +24,8 @@ void Terrain::init()
 	if (this->width == 0 || this->height == 0)
 	{
 		this->setImageDataWidthAndHeight();
-		Plane::vertices(this->width, this->height, this->mesh, this->indices, this->hmImageData);
-		stbi_image_free(this->hmImageData);
+		Plane::vertices(this->width, this->height, this->mesh, this->indices, this->hmImageData, this->scale);
+		// stbi_image_free(this->hmImageData);
 	}
 	else
 	{
@@ -35,6 +35,11 @@ void Terrain::init()
 	Plane::normals(this->mesh, this->indices);
 	
 	this->generateBuffers();
+}
+
+void Terrain::updateVerticesByScale()
+{
+	Plane::vertices(this->width, this->height, this->mesh, this->indices, this->hmImageData, this->scale);
 }
 
 void Terrain::draw(glm::vec3 lightPosition)
@@ -59,16 +64,15 @@ void Terrain::draw(glm::vec3 lightPosition)
 
 void Terrain::generateBuffers()
 {
-	unsigned int VBO;
 	unsigned int IBO;
 
 	glGenVertexArrays(1, &this->VAO);
-	glGenBuffers(1, &VBO);
+	glGenBuffers(1, &this->VBO);
 	glGenBuffers(1, &IBO);
 	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
 	glBindVertexArray(this->VAO);
 
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
 	glBufferData(GL_ARRAY_BUFFER, this->mesh.size() * sizeof(MeshStruct), &this->mesh[0], GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);

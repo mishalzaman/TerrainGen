@@ -19,7 +19,9 @@ public:
 	Terrain(unsigned int width, unsigned int height);
 	~Terrain();
 	void init();
+	void updateVerticesByScale();
 	void draw(glm::vec3 lightPosition);
+	float scale = 0.32;
 private:
 	void generateBuffers();
 	void setImageDataWidthAndHeight();
@@ -28,6 +30,7 @@ private:
 	std::vector<MeshStruct> mesh;
 	std::vector<glm::uvec3> indices;
 	unsigned int VAO;
+	unsigned int VBO;
 	Shader shader;
 
 	unsigned char *hmImageData;

@@ -30,7 +30,11 @@ void Engine::load()
 		0.1f,
 		100.0f
 	);
+	this->view = this->camera.getViewMatrix();
+
+	this->uniformBufferMatrices.updateUBOMatricesView(view);
 	this->uniformBufferMatrices.updateUBOMatricesProjection(projection);
+	
 	this->light.load();
 	this->framebuffer.load();
 }
@@ -57,6 +61,9 @@ void Engine::update(float deltaTime)
 				this->camera.mousePositionUpdate(deltaTime, x, y);
 				SDL_WarpMouseInWindow(this->window, this->screenWidth / 2.0f, this->screenHeight / 2.0f);
 			}
+
+			this->view = this->camera.getViewMatrix();
+			this->uniformBufferMatrices.updateUBOMatricesView(view);
 		}
 
 		// camera movement
@@ -72,9 +79,6 @@ void Engine::update(float deltaTime)
 	}
 
 	if (this->input.isQuit()) { this->shutDown = true; }
-
-	this->view = this->camera.getViewMatrix();
-	this->uniformBufferMatrices.updateUBOMatricesView(view);
 }
 
 void Engine::render()
@@ -92,9 +96,15 @@ void Engine::render()
 
 	// render gui
 	ImGui::SetNextWindowPos(ImVec2(0,0)); // sets position of window
+	ImGui::SetNextWindowContentSize(ImVec2(250, this->screenHeight*0.75));
 	ImGui::Begin("Terrain", NULL, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings);
 	ImGui::PushItemWidth(250);
-	ImGui::Checkbox("Wireframe", &this->isWireframe);
+	ImGui::Spacing();
+	ImGui::Checkbox("Show Wireframe", &this->isWireframe);
+	ImGui::Spacing();
+	ImGui::Separator();
+	ImGui::Text("Configuration");
+	ImGui::SliderFloat("Scale", &this->terrain.scale, 0.0, 1.0);
 	ImGui::End();
 }
 
