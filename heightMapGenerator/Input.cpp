@@ -16,6 +16,8 @@ void Input::update(float deltaTime)
 		// Update input events for Imgui
 		ImGui_ImplSDL2_ProcessEvent(&event);
 
+		this->mouseMotion = false;
+
 		switch (this->event.type) {
 		case SDL_KEYDOWN:
 			if (event.key.keysym.sym == SDLK_w && event.key.repeat == 0) { this->forward = true; }
@@ -34,6 +36,7 @@ void Input::update(float deltaTime)
 			if (event.key.keysym.sym == SDLK_d && event.key.repeat == 0) { this->strafeRight = false; }
 			// left shift
 			if (event.key.keysym.sym == SDLK_LSHIFT && event.key.repeat == 0) { this->lShift = false; }
+			break;
 		case SDL_MOUSEMOTION:
 			this->mouseMotion = true;
 		default:
@@ -48,13 +51,16 @@ bool Input::isStrafeLeft() { return this->strafeLeft; }
 bool Input::isStrafeRight() { return this->strafeRight; }
 bool Input::isMouseMotion()
 { 
-	if (this->mouseMotion)
-	{
-		this->mouseMotion = false;
-		return true;
-	}
+	return this->mouseMotion;
 
-	return false;
+	//if (this->mouseMotion)
+	//{
+	//	this->mouseMotion = false;
+	//	return true;
+	//}
+
+	//this->mouseMotion = true;
+	//return false;
 }
 bool Input::isLShift() { return this->lShift; }
 bool Input::isTab() { return this->tab; }
