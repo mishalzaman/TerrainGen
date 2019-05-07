@@ -30,7 +30,7 @@ private:
 	float yaw = -90.0f; // this is typicall where the view faces towards. -90 degrees is facing towards the z axis
 	float pitch = -90.0f;
 
-	glm::vec3 position = glm::vec3(-0.0f, 4.0f, 0.0f); // position of camera in the world
+	glm::vec3 position = glm::vec3(0.0f, 4.0f, 0.0f); // position of camera in the world
 	glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
 
 	glm::vec3 frontVector;

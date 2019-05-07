@@ -49,22 +49,19 @@ void Engine::update(float deltaTime)
 
 		if (this->enteredRenderViewMovement == false)
 		{
-			std::cout << "enteredRenderViewMovement" << std::endl;
 			SDL_WarpMouseInWindow(this->window, this->screenWidth / 2.0f, this->screenHeight / 2.0f);
 			this->enteredRenderViewMovement = true;
 		}
 		else
 		{
-			if (this->input.isMouseMotion())
+			if (this->input.isMouseMotion() == true)
 			{
-				std::cout << "in isMouseMotion" << std::endl;
 				int x, y;
 				SDL_GetMouseState(&x, &y);
 				this->camera.mousePositionUpdate(deltaTime, x, y);
 				SDL_WarpMouseInWindow(this->window, this->screenWidth / 2.0f, this->screenHeight / 2.0f);
 			}
 
-			std::cout << "update view" << std::endl;
 			this->view = this->camera.getViewMatrix();
 			this->uniformBufferMatrices.updateUBOMatricesView(view);
 		}
