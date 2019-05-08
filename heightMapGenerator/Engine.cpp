@@ -32,8 +32,8 @@ void Engine::load()
 	);
 	this->view = this->camera.getViewMatrix();
 
-	this->uniformBufferMatrices.updateUBOMatricesView(view);
 	this->uniformBufferMatrices.updateUBOMatricesProjection(projection);
+	this->uniformBufferMatrices.updateUBOMatricesView(view);
 	
 	this->light.load();
 	this->framebuffer.load();
